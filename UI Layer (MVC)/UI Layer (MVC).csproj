@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>UI_Layer__MVC_</RootNamespace>
   </PropertyGroup>
 
 </Project>

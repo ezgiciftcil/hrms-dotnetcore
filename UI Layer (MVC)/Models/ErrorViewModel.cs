@@ -1,6 +1,6 @@
 using System;
 
-namespace HRMS.Models
+namespace UI_Layer__MVC_.Models
 {
     public class ErrorViewModel
     {
