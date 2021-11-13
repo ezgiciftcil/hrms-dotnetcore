@@ -1,17 +1,22 @@
-using DataAccessLayer.EF;
+using BusinessLayer;
+using BusinessLayer.Interfaces;
+using DataAccessLayer.Repositories;
+using DataAccessLayer.Repositories.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UI_Layer__MVC_
+namespace API_Test
 {
     public class Startup
     {
@@ -25,9 +30,20 @@ namespace UI_Layer__MVC_
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            
-            
+
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API_Test", Version = "v1" });
+            });
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<ICityDal, CityRepository>();
+            services.AddScoped<IEmployerService, EmployerService>();
+            services.AddScoped<IEmployerDal, EmployerRepository>();
+            services.AddScoped<IJobTitleDal, JobTitleRepository>();
+            services.AddScoped<IJobTitleService, JobTitleService>();
+            services.AddScoped<IJobAdvertisementDal , JobAdvertisementRepository>();
+            services.AddScoped<IJobAdvertisementService, JobAdvertisementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,15 +52,11 @@ namespace UI_Layer__MVC_
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API_Test v1"));
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -52,11 +64,8 @@ namespace UI_Layer__MVC_
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
-
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer
 {
-    public class JobAdvertisement
+    public class JobAdvertisement:IEntity
     {
         [Key]
         public int JobAdvertisementId { get; set; }
@@ -24,9 +24,7 @@ namespace EntityLayer
         public int CityId { get; set; }
         public virtual City City { get; set; }
 
-        [MaxLength(6)]
         public int MinSalary { get; set; }
-        [MaxLength(6)]
         public int MaxSalary { get; set; }
         public DateTime PublishDate { get; set; }
         public bool IsActive { get; set; }

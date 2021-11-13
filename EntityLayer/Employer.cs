@@ -17,8 +17,7 @@ namespace EntityLayer
         [MaxLength(150)]
         public string CompanyWebsite { get; set; }
         [Required]
-        [MaxLength(12)]
-        public int PhoneNumber { get; set; }
-        public virtual ICollection<JobAdvertisement> JobAdvertisements { get; set; }
+        public string PhoneNumber { get; set; }
+        public List<JobAdvertisement> JobAdvertisements = new List<JobAdvertisement>();
     }
 }

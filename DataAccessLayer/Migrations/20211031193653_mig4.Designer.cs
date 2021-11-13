@@ -4,14 +4,16 @@ using DataAccessLayer.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20211031193653_mig4")]
+    partial class mig4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,9 +83,11 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("MaxSalary")
+                        .HasMaxLength(6)
                         .HasColumnType("int");
 
                     b.Property<int>("MinSalary")
+                        .HasMaxLength(6)
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PublishDate")
@@ -162,9 +166,8 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("Employer");
                 });
@@ -204,11 +207,11 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.HasOne("EntityLayer.Employer", "Employer")
-                        .WithMany()
+                        .WithMany("JobAdvertisements")
                         .HasForeignKey("EmployerUserId");
 
                     b.HasOne("EntityLayer.JobTitle", "JobTitle")
-                        .WithMany()
+                        .WithMany("JobAdvertisements")
                         .HasForeignKey("JobTitleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -218,6 +221,16 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Employer");
 
                     b.Navigation("JobTitle");
+                });
+
+            modelBuilder.Entity("EntityLayer.JobTitle", b =>
+                {
+                    b.Navigation("JobAdvertisements");
+                });
+
+            modelBuilder.Entity("EntityLayer.Employer", b =>
+                {
+                    b.Navigation("JobAdvertisements");
                 });
 
             modelBuilder.Entity("EntityLayer.JobSeeker", b =>

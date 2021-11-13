@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer
 {
-    public class CV
+    public class CV:IEntity
     {
         [Key]
         public int CVId { get; set; }
