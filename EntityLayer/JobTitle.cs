@@ -14,6 +14,5 @@ namespace EntityLayer
         [Required]
         [MaxLength(100)]
         public string TitleName { get; set; }
-        public List<JobAdvertisement> JobAdvertisements = new List<JobAdvertisement>(); 
     }
 }

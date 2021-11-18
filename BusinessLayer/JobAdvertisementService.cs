@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using BusinessLayer.Utilities.Results;
+using DataAccessLayer.Repositories.Interface;
 using EntityLayer;
 using System;
 using System.Collections.Generic;
@@ -11,29 +12,38 @@ namespace BusinessLayer
 {
     public class JobAdvertisementService : IJobAdvertisementService
     {
+        private IJobAdvertisementDal _jobAdvertisementDal;
+        public JobAdvertisementService(IJobAdvertisementDal jobAdvertisementDal)
+        {
+            _jobAdvertisementDal = jobAdvertisementDal;
+        }
         public Result AddJobAdvertisement(JobAdvertisement jobAdvertisement)
         {
-            throw new NotImplementedException();
+            _jobAdvertisementDal.Add(jobAdvertisement);
+            return new Result(true, "İş İlanı Eklendi.");
         }
 
         public Result DeleteJobAdvertisement(JobAdvertisement jobAdvertisement)
         {
-            throw new NotImplementedException();
+            jobAdvertisement.IsActive = false;
+            _jobAdvertisementDal.Update(jobAdvertisement);
+            return new Result(true, "İş İlanı İnaktif Edildi.");
         }
 
         public DataResult<List<JobAdvertisement>> GetAllJobAdvertisements()
         {
-            throw new NotImplementedException();
+            return new DataResult<List<JobAdvertisement>>(_jobAdvertisementDal.GetAll(), true, "Aktif/İnaktif Tüm İş İlanları Listelendi");
         }
 
-        public DataResult<City> GetJobAdvertisementById(int id)
+        public DataResult<JobAdvertisement> GetJobAdvertisementById(int id)
         {
-            throw new NotImplementedException();
+            return new DataResult<JobAdvertisement>(_jobAdvertisementDal.GetById(id), true, "İş ilanı getirildi.");
         }
 
         public Result UpdateJobAdvertisement(JobAdvertisement jobAdvertisement)
         {
-            throw new NotImplementedException();
+            _jobAdvertisementDal.Update(jobAdvertisement);
+            return new Result(true, "İş İlanı Güncellendi.");
         }
     }
 }

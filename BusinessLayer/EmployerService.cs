@@ -32,7 +32,7 @@ namespace BusinessLayer
             {
                 return new Result(false, "Email kısmını boş bırakamasınız!");
             }
-            if(employer.Password.Length >= 8 && employer.Password.Length <= 12)
+            if(!(employer.Password.Length >= 8 && employer.Password.Length <= 12))
             {
                 return new Result(false, "Gireceğiniz şifre en az 8, en fazla 12 karakterli olmalıdır!");
             }

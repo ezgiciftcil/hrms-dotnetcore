@@ -1,7 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using BusinessLayer.Utilities.Results;
 using EntityLayer;
-using EntityLayer.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,6 +18,7 @@ namespace API_Test.Controllers
         {
             _jobAdvertisementService = jobAdvertisementService;
         }
+
         [HttpPost("add_jobAdvertisement")]
         public Result AddJobAdvertisement(JobAdvertisement jobAdvertisement)
         {
@@ -34,12 +34,12 @@ namespace API_Test.Controllers
         {
             return _jobAdvertisementService.DeleteJobAdvertisement(jobAdvertisement);
         }
-        [HttpGet("list_jobAdvertisements")]
+        [HttpGet("list_jobAdvertisement")]
         public DataResult<List<JobAdvertisement>> GetAllJobAdvertisements()
         {
             return _jobAdvertisementService.GetAllJobAdvertisements();
         }
-        [HttpPost("get_jobAdvertisement")]
+        [HttpPost("get_jobAdvertisemet")]
         public DataResult<JobAdvertisement> GetJobAdvertisementById(int id)
         {
             return _jobAdvertisementService.GetJobAdvertisementById(id);

@@ -18,6 +18,5 @@ namespace EntityLayer
         public string CompanyWebsite { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
-        public List<JobAdvertisement> JobAdvertisements = new List<JobAdvertisement>();
     }
 }

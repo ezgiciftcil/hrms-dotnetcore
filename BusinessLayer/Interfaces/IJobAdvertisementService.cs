@@ -14,6 +14,6 @@ namespace BusinessLayer.Interfaces
         Result UpdateJobAdvertisement(JobAdvertisement jobAdvertisement);
         Result DeleteJobAdvertisement(JobAdvertisement jobAdvertisement);
         DataResult<List<JobAdvertisement>> GetAllJobAdvertisements();
-        DataResult<City> GetJobAdvertisementById(int id);
+        DataResult<JobAdvertisement> GetJobAdvertisementById(int id);
     }
 }

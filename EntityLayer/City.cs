@@ -14,6 +14,5 @@ namespace EntityLayer
         [Required]
         [MaxLength(25)]
         public string CityName { get; set; }
-        public ICollection<JobAdvertisement> JobAdvertisements;
     }
 }
