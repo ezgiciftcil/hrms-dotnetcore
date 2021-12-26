@@ -5,7 +5,7 @@ using EntityLayer;
 using System;
 using System.Collections.Generic;
 
-namespace BusinessLayer
+namespace BusinessLayer.Services
 {
     public class UserService : IUserService
     {

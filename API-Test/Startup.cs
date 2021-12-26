@@ -1,5 +1,6 @@
 using BusinessLayer;
 using BusinessLayer.Interfaces;
+using BusinessLayer.Services;
 using DataAccessLayer.AdoRepositories;
 using DataAccessLayer.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -33,9 +34,9 @@ namespace API_Test
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEmployerDal, AdoEmployerRepository>();
             services.AddScoped<IEmployerService, EmployerService>();
-
+            services.AddScoped<ICityDal, AdoCityRepository>();
             services.AddScoped<ICityService, CityService>();
-            services.AddScoped<ICityDal, CityRepository>();
+
             services.AddScoped<IJobAdvertisementDal , JobAdvertisementRepository>();
             services.AddScoped<IJobAdvertisementService, JobAdvertisementService>();
         }

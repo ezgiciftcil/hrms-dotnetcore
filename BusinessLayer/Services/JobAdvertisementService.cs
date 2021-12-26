@@ -4,7 +4,7 @@ using DataAccessLayer.Interfaces;
 using EntityLayer;
 using System.Collections.Generic;
 
-namespace BusinessLayer
+namespace BusinessLayer.Services
 {
     public class JobAdvertisementService : IJobAdvertisementService
     {

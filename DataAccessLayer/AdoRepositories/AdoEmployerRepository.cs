@@ -73,7 +73,7 @@ namespace DataAccessLayer.AdoRepositories
             {
                 var sqlCommand = new SqlCommand("GetEmployerById", conn);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("UserId", id);
+                sqlCommand.Parameters.AddWithValue("@UserId", id);
                 conn.Open();
                 using (SqlDataReader reader = sqlCommand.ExecuteReader())
                 {

@@ -2,10 +2,7 @@
 using BusinessLayer.Utilities.Results;
 using EntityLayer;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API_Test.Controllers
 {
@@ -13,7 +10,7 @@ namespace API_Test.Controllers
     [ApiController]
     public class CityController : Controller
     {
-        ICityService cityService;
+        private readonly ICityService cityService;
         public CityController(ICityService _cityService)
         {
             cityService = _cityService;
