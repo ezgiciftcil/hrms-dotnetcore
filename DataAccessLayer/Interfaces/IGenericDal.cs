@@ -1,11 +1,7 @@
 ﻿using EntityLayer;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataAccessLayer.Repositories.Interface
+namespace DataAccessLayer.Interfaces
 {
     public interface IGenericDal<T> where T:class,IEntity,new()
     {

@@ -1,24 +1,25 @@
 ﻿using BusinessLayer.Interfaces;
 using BusinessLayer.Utilities.Results;
-using DataAccessLayer.Repositories.Interface;
+using DataAccessLayer.Interfaces;
 using EntityLayer;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
     public class JobAdvertisementService : IJobAdvertisementService
     {
         private IJobAdvertisementDal _jobAdvertisementDal;
-        public JobAdvertisementService(IJobAdvertisementDal jobAdvertisementDal)
+        private ICityDal _cityDal;
+        private IEmployerDal _employerDal;
+        public JobAdvertisementService(IJobAdvertisementDal jobAdvertisementDal, ICityDal cityDal, IEmployerDal employerDal)
         {
             _jobAdvertisementDal = jobAdvertisementDal;
+            _cityDal = cityDal;
+            _employerDal = employerDal;
         }
         public Result AddJobAdvertisement(JobAdvertisement jobAdvertisement)
         {
+         
             _jobAdvertisementDal.Add(jobAdvertisement);
             return new Result(true, "İş İlanı Eklendi.");
         }

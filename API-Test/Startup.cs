@@ -1,20 +1,13 @@
 using BusinessLayer;
 using BusinessLayer.Interfaces;
-using DataAccessLayer.Repositories;
-using DataAccessLayer.Repositories.Interface;
+using DataAccessLayer.AdoRepositories;
+using DataAccessLayer.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API_Test
 {
@@ -36,12 +29,13 @@ namespace API_Test
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API_Test", Version = "v1" });
             });
+            services.AddScoped<IUserDal, AdoUserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<ICityDal, CityRepository>();
             services.AddScoped<IEmployerService, EmployerService>();
             services.AddScoped<IEmployerDal, EmployerRepository>();
-            services.AddScoped<IJobTitleDal, JobTitleRepository>();
-            services.AddScoped<IJobTitleService, JobTitleService>();
             services.AddScoped<IJobAdvertisementDal , JobAdvertisementRepository>();
             services.AddScoped<IJobAdvertisementService, JobAdvertisementService>();
         }
