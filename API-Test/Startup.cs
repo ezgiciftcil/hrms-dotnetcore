@@ -36,9 +36,10 @@ namespace API_Test
             services.AddScoped<IEmployerService, EmployerService>();
             services.AddScoped<ICityDal, AdoCityRepository>();
             services.AddScoped<ICityService, CityService>();
-
-            services.AddScoped<IJobAdvertisementDal , JobAdvertisementRepository>();
+            services.AddScoped<IJobAdvertisementDal, AdoJobAdvertisementRepository>();
             services.AddScoped<IJobAdvertisementService, JobAdvertisementService>();
+            services.AddScoped<IJobSeekerDal, AdoJobSeekerRepository>();
+            services.AddScoped<IJobSeekerService, JobSeekerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

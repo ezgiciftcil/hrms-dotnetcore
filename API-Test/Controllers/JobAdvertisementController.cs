@@ -10,7 +10,7 @@ namespace API_Test.Controllers
     [ApiController]
     public class JobAdvertisementController : Controller
     {
-        private IJobAdvertisementService _jobAdvertisementService;
+        private readonly IJobAdvertisementService _jobAdvertisementService;
         public JobAdvertisementController(IJobAdvertisementService jobAdvertisementService)
         {
             _jobAdvertisementService = jobAdvertisementService;
