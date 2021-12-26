@@ -31,11 +31,11 @@ namespace API_Test
             });
             services.AddScoped<IUserDal, AdoUserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmployerDal, AdoEmployerRepository>();
+            services.AddScoped<IEmployerService, EmployerService>();
 
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<ICityDal, CityRepository>();
-            services.AddScoped<IEmployerService, EmployerService>();
-            services.AddScoped<IEmployerDal, EmployerRepository>();
             services.AddScoped<IJobAdvertisementDal , JobAdvertisementRepository>();
             services.AddScoped<IJobAdvertisementService, JobAdvertisementService>();
         }

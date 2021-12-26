@@ -13,7 +13,7 @@ namespace API_Test.Controllers
     [ApiController]
     public class EmployerController : Controller
     {
-        private IEmployerService _employerService;
+        private readonly IEmployerService _employerService;
         public EmployerController(IEmployerService employerService)
         {
             _employerService = employerService;
@@ -38,15 +38,15 @@ namespace API_Test.Controllers
         }
 
         [HttpGet("list_employers")]
-        public DataResult<List<Employer>> GetAllCities()
+        public DataResult<List<Employer>> GetAllEmployers()
         {
             return _employerService.GetAllEmployers();
         }
 
-        [HttpPost("get_city")]
-        public DataResult<Employer> GetCityById(int CityId)
+        [HttpPost("get_employer")]
+        public DataResult<Employer> GetEmployerById(int id)
         {
-            return _employerService.GetEmployerById(CityId);
+            return _employerService.GetEmployerById(id);
         }
     }
 }

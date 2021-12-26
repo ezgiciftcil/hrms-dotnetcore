@@ -8,7 +8,7 @@ namespace BusinessLayer
 {
     public class EmployerService:IEmployerService
     {
-        private IEmployerDal _employerDal;
+        private readonly IEmployerDal _employerDal;
         public EmployerService(IEmployerDal employerDal)
         {
             _employerDal = employerDal;
@@ -18,23 +18,15 @@ namespace BusinessLayer
         {
             if(employer.CompanyName==null || employer.CompanyName.Length < 2)
             {
-                return new Result(false, "Şirket adı boş bırakılamaz!");
+                return new Result(false, "Please fill the company name!");
             }
             if (employer.CompanyWebsite == null)
             {
-                return new Result(false, "Web site kısmını boş bırakamazsınız!");
+                return new Result(false, "Please fill the company website!");
             }
-            if(employer.Email == null) //daha önce kullanulmış mı diye de bak 
+            if(!(employer.ContactNumber.Length!=11 || employer.ContactNumber.Length != 10))
             {
-                return new Result(false, "Email kısmını boş bırakamasınız!");
-            }
-            if(!(employer.Password.Length >= 8 && employer.Password.Length <= 12))
-            {
-                return new Result(false, "Gireceğiniz şifre en az 8, en fazla 12 karakterli olmalıdır!");
-            }
-            if(!(employer.PhoneNumber.Length!=10 || employer.PhoneNumber.Length != 12))
-            {
-                return new Result(false, "Şirketinize dair sabit hat veya telefon numarası girmek zorundasınız!");
+                return new Result(false, "Please enter your company's contact number carefully with 11 or 10 length");
             }
             else
             {
@@ -47,23 +39,23 @@ namespace BusinessLayer
         public Result DeleteEmployer(Employer employer)
         {
             _employerDal.Delete(employer);
-            return new Result(true, "Şirket üyeliğiniz silindi.");
+            return new Result(true, "Employer is deleted.");
         }
 
         public DataResult<List<Employer>> GetAllEmployers()
         {
-            return new DataResult<List<Employer>>(_employerDal.GetAll(), true, "İşveren Üyelikler Sıralanıyor");
+            return new DataResult<List<Employer>>(_employerDal.GetAll(), true, "All active/inactive employers are listed.");
         }
 
         public DataResult<Employer> GetEmployerById(int id)
         {
-            return new DataResult<Employer>(_employerDal.GetById(id), true, "İşveren bulundu");
+            return new DataResult<Employer>(_employerDal.GetById(id), true, "Employer is selected.");
         }
 
         public Result UpdateEmployer(Employer employer)
         {
             _employerDal.Update(employer);
-            return new Result(true, "İşveren bilgileri güncellendi.");
+            return new Result(true, "Employer informations are updated.");
         }
     }
 }
