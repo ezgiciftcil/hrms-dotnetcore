@@ -1,4 +1,4 @@
-﻿using BusinessLayer.Interfaces;
+﻿using BusinessLayer.Services.Interfaces;
 using BusinessLayer.Utilities.Results;
 using EntityLayer;
 using Microsoft.AspNetCore.Mvc;

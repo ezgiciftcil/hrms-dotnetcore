@@ -1,5 +1,4 @@
-using BusinessLayer;
-using BusinessLayer.Interfaces;
+using BusinessLayer.Services.Interfaces;
 using BusinessLayer.Services;
 using DataAccessLayer.AdoRepositories;
 using DataAccessLayer.Interfaces;
@@ -44,6 +43,10 @@ namespace API_Test
             services.AddScoped<IResumeService, ResumeService>();
             services.AddScoped<IEducationDal, AdoEducationRepository>();
             services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<ISkillDal, AdoSkillRepository>();
+            services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<IExperienceDal, AdoExperienceRepository>();
+            services.AddScoped<IExperienceService, ExperienceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

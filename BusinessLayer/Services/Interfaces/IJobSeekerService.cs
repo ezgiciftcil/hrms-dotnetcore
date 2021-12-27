@@ -2,7 +2,7 @@
 using EntityLayer;
 using System.Collections.Generic;
 
-namespace BusinessLayer.Interfaces
+namespace BusinessLayer.Services.Interfaces
 {
     public interface IJobSeekerService
     {
