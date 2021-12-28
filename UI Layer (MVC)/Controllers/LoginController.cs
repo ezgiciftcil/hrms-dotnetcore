@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Auth.DTOs;
 using BusinessLayer.Auth.Interfaces;
 using EntityLayer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UI_Layer__MVC_.Models;
 
@@ -8,10 +9,10 @@ namespace UI_Layer__MVC_.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IAuthService _registerService;
+        private readonly IAuthService _authService;
         public LoginController(IAuthService registerService)
         {
-            _registerService = registerService;
+            _authService = registerService;
         }
 
         public IActionResult Index()
@@ -31,8 +32,10 @@ namespace UI_Layer__MVC_.Controllers
                 Email = user.Email,
                 Password = user.Password
             };
-            if ((_registerService.Login(loginUser).Success))
+            if ((_authService.Login(loginUser).Success))
             {
+                var userId = _authService.GetUserId(user.Email);
+                HttpContext.Session.SetInt32(SessionInfo.SessionUserId, userId);
                 return RedirectToAction("Index", "Test");
             }
 
@@ -47,8 +50,10 @@ namespace UI_Layer__MVC_.Controllers
                 Email = user.Email,
                 Password = user.Password
             };
-            if ((_registerService.Login(loginUser).Success))
+            if ((_authService.Login(loginUser).Success))
             {
+                var userId = _authService.GetUserId(user.Email);
+                HttpContext.Session.SetInt32(SessionInfo.SessionUserId, userId);
                 return RedirectToAction("Index", "Test");
             }
 

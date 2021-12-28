@@ -100,5 +100,11 @@ namespace BusinessLayer.Auth
             }
             return new Result(true);
         }
+
+        public int GetUserId(string email)
+        {
+            return _userService.GetIdByEmail(email);
+        }
+        
     }
 }

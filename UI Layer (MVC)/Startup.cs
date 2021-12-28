@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace UI_Layer__MVC_
 {
@@ -24,6 +25,11 @@ namespace UI_Layer__MVC_
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);
+            });
+
             services.AddControllersWithViews();
             services.AddScoped<IUserDal, AdoUserRepository>();
             services.AddScoped<IUserService, UserService>();
@@ -60,6 +66,7 @@ namespace UI_Layer__MVC_
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -67,6 +74,8 @@ namespace UI_Layer__MVC_
 
             app.UseAuthorization();
 
+            app.UseCookiePolicy();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

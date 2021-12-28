@@ -8,5 +8,6 @@ namespace BusinessLayer.Auth.Interfaces
         Result RegisterJobSeeker(JobSeekerDTO jobSeeker);
         Result RegisterEmployer(EmployerDTO employer);
         Result Login(UserDTO user);
+        int GetUserId(string email);
     }
 }
