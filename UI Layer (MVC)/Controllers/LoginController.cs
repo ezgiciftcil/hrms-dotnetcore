@@ -36,7 +36,7 @@ namespace UI_Layer__MVC_.Controllers
             {
                 var userId = _authService.GetUserId(user.Email);
                 HttpContext.Session.SetInt32(SessionInfo.SessionUserId, userId);
-                return RedirectToAction("Index", "Test");
+                return RedirectToAction("JobSeekerHome", "Home");
             }
 
             return View();
@@ -54,7 +54,7 @@ namespace UI_Layer__MVC_.Controllers
             {
                 var userId = _authService.GetUserId(user.Email);
                 HttpContext.Session.SetInt32(SessionInfo.SessionUserId, userId);
-                return RedirectToAction("Index", "Test");
+                return RedirectToAction("EmployerHome", "Home");
             }
 
             return View();

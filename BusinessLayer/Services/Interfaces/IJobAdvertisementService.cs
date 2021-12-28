@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Utilities.Results;
 using EntityLayer;
+using EntityLayer.DTO_s;
 using System.Collections.Generic;
 
 namespace BusinessLayer.Services.Interfaces
@@ -11,5 +12,6 @@ namespace BusinessLayer.Services.Interfaces
         Result DeleteJobAdvertisement(JobAdvertisement jobAdvertisement);
         DataResult<List<JobAdvertisement>> GetAllJobAdvertisements();
         DataResult<JobAdvertisement> GetJobAdvertisementById(int id);
+        DataResult<List<JobAdvertisementDTO>> GetAllActiveJobAdvertisements();
     }
 }

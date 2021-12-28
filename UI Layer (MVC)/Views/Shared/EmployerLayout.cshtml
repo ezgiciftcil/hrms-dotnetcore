@@ -63,7 +63,8 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-building nav-icon"></i>
-                                <p>My Advertisements
+                                <p>
+                                    My Advertisements
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -154,5 +155,6 @@
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/js/adminlte.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

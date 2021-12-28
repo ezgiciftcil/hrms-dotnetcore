@@ -65,13 +65,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="@Url.Action("Index", "ActiveAdvertisements")" class="nav-link">
                                         <i class="fas fa-search nav-icon"></i>
                                         <p>Active Advertisements</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="@Url.Action("Index", "AppliedAdvertisements")" class="nav-link">
                                         <i class="fas fa-check nav-icon"></i>
                                         <p>Applied Advertisements</p>
                                     </a>
@@ -89,7 +89,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="@Url.Action("Index", "Educations")" class="nav-link">
                                         <i class="fas fa-graduation-cap nav-icon"></i>
                                         <p>
                                             Educations
@@ -97,13 +97,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="@Url.Action("Index", "Experiences")" class="nav-link">
                                         <i class="far fa-file nav-icon"></i>
                                         <p>Experiences</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="@Url.Action("Index", "Skills")" class="nav-link">
                                         <i class="fas fa-tools nav-icon"></i>
                                         <p>Skills</p>
                                     </a>
@@ -112,13 +112,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("JobSeekerHome", "Home")" class="nav-link">
                                 <i class="fas fa-home nav-icon"></i>
                                 <p>Home</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("Index", "Logout")" class="nav-link">
                                 <i class="fas fa-sign-out-alt nav-icon"></i>
                                 <p>Log out</p>
                             </a>
@@ -181,5 +181,6 @@
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/js/adminlte.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

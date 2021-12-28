@@ -27,7 +27,7 @@ namespace UI_Layer__MVC_
         {
             services.AddDistributedMemoryCache();
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(1);
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 
             services.AddControllersWithViews();

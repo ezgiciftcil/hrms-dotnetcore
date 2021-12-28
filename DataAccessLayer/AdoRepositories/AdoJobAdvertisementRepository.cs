@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Interfaces;
 using EntityLayer;
+using EntityLayer.DTO_s;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,34 @@ namespace DataAccessLayer.AdoRepositories
                         MaxSalary= Convert.ToInt32(reader["MaxSalary"]),
                         MinSalary = Convert.ToInt32(reader["MinSalary"]),
                         PublishDate=Convert.ToDateTime(reader["PublishDate"])
+                    };
+
+                    jobAdvertisements.Add(jobAdvertisement);
+                }
+
+                reader.Close();
+                conn.Close();
+            }
+
+            return jobAdvertisements;
+        }
+
+        public List<JobAdvertisementDTO> GetAllActiveJobAdvertisements()
+        {
+            List<JobAdvertisementDTO> jobAdvertisements = new List<JobAdvertisementDTO>();
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                var sqlCommand = new SqlCommand("GetAllActiveJobAdvertisements", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    var jobAdvertisement = new JobAdvertisementDTO
+                    {
+                        CompanyName= reader["CompanyName"].ToString(),
+                        JobAdvertisementId = Convert.ToInt32(reader["JobAdvertisementId"]),
+                        JobTitle = reader["JobTitle"].ToString()
                     };
 
                     jobAdvertisements.Add(jobAdvertisement);

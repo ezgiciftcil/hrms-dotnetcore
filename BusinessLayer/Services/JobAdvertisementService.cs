@@ -2,6 +2,7 @@
 using BusinessLayer.Utilities.Results;
 using DataAccessLayer.Interfaces;
 using EntityLayer;
+using EntityLayer.DTO_s;
 using System;
 using System.Collections.Generic;
 
@@ -34,6 +35,11 @@ namespace BusinessLayer.Services
         {
             _jobAdvertisementDal.Delete(jobAdvertisement);
             return new Result(true, "Job Advertisement is deleted.");
+        }
+
+        public DataResult<List<JobAdvertisementDTO>> GetAllActiveJobAdvertisements()
+        {
+            return new DataResult<List<JobAdvertisementDTO>>(_jobAdvertisementDal.GetAllActiveJobAdvertisements(), true);
         }
 
         public DataResult<List<JobAdvertisement>> GetAllJobAdvertisements()
