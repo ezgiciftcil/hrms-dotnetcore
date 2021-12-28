@@ -92,6 +92,51 @@ namespace DataAccessLayer.AdoRepositories
             }
         }
 
+        public int GetIdByEmail(string email)
+        {
+            int UserId;
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                SqlCommand sqlCommand = new SqlCommand("GetUserIdByEmail", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Email", email);
+                conn.Open();
+                UserId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                conn.Close();
+                return UserId;
+            }
+        }
+
+        public string GetPasswordByEmail(string email)
+        {
+            string password;
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                SqlCommand sqlCommand = new SqlCommand("GetPasswordByEmail", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Email", email);
+                conn.Open();
+                password = (sqlCommand.ExecuteScalar()).ToString();
+                conn.Close();
+                return password;
+            }
+        }
+
+        public int IsEmailExist(string email)
+        {
+            int emailNo;
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                SqlCommand sqlCommand = new SqlCommand("IsEmailExist", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Email", email);
+                conn.Open();
+                emailNo = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                conn.Close();
+                return emailNo;
+            }
+        }
+
         public void Update(User t)
         {
             using (var conn = new SqlConnection(MSSQLConnectionString.connString))

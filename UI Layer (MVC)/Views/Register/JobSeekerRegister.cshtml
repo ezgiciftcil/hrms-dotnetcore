@@ -1,4 +1,4 @@
-﻿
+﻿@model UI_Layer__MVC_.Models.JobSeekerRegister
 @{
     Layout = null;
 }
@@ -28,10 +28,10 @@
         <div class="card">
             <div class="card-body login-card-body">
 
-                <form action="../../index3.html" method="post">
+                <form action="@Url.Action("JobSeekerRegister", "Register")" method="post">
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="First Name">
+                        <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Last Name">
+                        <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Phone Number">
+                        <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Phone Number">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password Repeat">
+                        <input asp-for="PasswordRepeat" type="password" class="form-control" placeholder="Password Repeat">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

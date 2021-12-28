@@ -11,5 +11,8 @@ namespace BusinessLayer.Services.Interfaces
         Result DeleteUser(User user);
         DataResult<List<User>> GetAllUsers();
         DataResult<User> GetUserById(int id);
+        int GetIdByEmail(string email);
+        string GetPasswordByEmail(string email);
+        bool IsEmailExist(string email);
     }
 }

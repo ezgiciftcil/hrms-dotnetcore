@@ -42,9 +42,29 @@ namespace BusinessLayer.Services
             return new DataResult<List<User>>(_userDal.GetAll(), true, "All active/inactive users are listed.");
         }
 
+        public int GetIdByEmail(string email)
+        {
+            return _userDal.GetIdByEmail(email);
+        }
+
+        public string GetPasswordByEmail(string email)
+        {
+            return _userDal.GetPasswordByEmail(email);
+        }
+
         public DataResult<User> GetUserById(int id)
         {
             return new DataResult<User>(_userDal.GetById(id), true, "The user is listed.");
+        }
+
+        public bool IsEmailExist(string email)
+        {
+           var emailCount = _userDal.IsEmailExist(email);
+            if (emailCount == 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         public Result UpdateUser(User user)

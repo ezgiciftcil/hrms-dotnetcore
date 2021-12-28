@@ -1,4 +1,4 @@
-﻿
+﻿@model UI_Layer__MVC_.Models.UserLogin
 @{
     ViewData["Title"] = "JobSeekerLogin";
     Layout = null;
@@ -29,9 +29,9 @@
         <div class="card">
             <div class="card-body login-card-body">
 
-                <form action="../../index3.html" method="post">
+                <form action="@Url.Action("JobSeekerLogin", "Login")" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="User Email">
+                        <input asp-for="Email" type="email" class="form-control" placeholder="User Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

@@ -1,3 +1,9 @@
+using BusinessLayer.Auth;
+using BusinessLayer.Auth.Interfaces;
+using BusinessLayer.Services;
+using BusinessLayer.Services.Interfaces;
+using DataAccessLayer.AdoRepositories;
+using DataAccessLayer.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,8 +25,26 @@ namespace UI_Layer__MVC_
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
-            
+            services.AddScoped<IUserDal, AdoUserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmployerDal, AdoEmployerRepository>();
+            services.AddScoped<IEmployerService, EmployerService>();
+            services.AddScoped<ICityDal, AdoCityRepository>();
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IJobAdvertisementDal, AdoJobAdvertisementRepository>();
+            services.AddScoped<IJobAdvertisementService, JobAdvertisementService>();
+            services.AddScoped<IJobSeekerDal, AdoJobSeekerRepository>();
+            services.AddScoped<IJobSeekerService, JobSeekerService>();
+            services.AddScoped<IResumeDal, AdoResumeRepository>();
+            services.AddScoped<IResumeService, ResumeService>();
+            services.AddScoped<IEducationDal, AdoEducationRepository>();
+            services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<ISkillDal, AdoSkillRepository>();
+            services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<IExperienceDal, AdoExperienceRepository>();
+            services.AddScoped<IExperienceService, ExperienceService>();
+            services.AddScoped<IAuthService, AuthService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
