@@ -11,5 +11,6 @@ namespace BusinessLayer.Services.Interfaces
         Result DeleteResume(Resume resume);
         DataResult<List<Resume>> GetAllResumes();
         DataResult<Resume> GetResumeById(int id);
+        int GetJobSeekerResumeId(int JobSeekerId);
     }
 }

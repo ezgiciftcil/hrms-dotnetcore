@@ -1,8 +1,111 @@
-﻿
+﻿@model List<Skill>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Skills";
     Layout = "~/Views/Shared/JobSeekerLayout.cshtml";
 }
 
-<h1>Index</h1>
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/css/all.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/css/adminlte.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<center>
+    <p><h1>My Skills</h1></p>
+</center>
+<div class="row mt-3">
+    <div class="col-md-10 offset-md-1">
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col px-4">
+                        <div>
+
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <table id="table_id" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Skill Name</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                <tr>
+                                                    <td>@item.SkillName</td>
+
+                                                    <td>
+                                                        <center>
+                                                            <a href="@Url.Action("EditSkill","Skills",new { skillId= item.SkillId })" class="btn btn-info"> Edit </a>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <a href="@Url.Action("DeleteSkill","Skills",new { skillId= item.SkillId })" class="btn btn-danger"> Delete </a>
+                                                        </center>
+                                                    </td>
+                                                   
+                                                </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <a href="@Url.Action("AddNewSkill","Skills")" class="btn btn-info">
+                            Add New Skill
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="~/js/adminlte.min.js"></script>
+    <script src="~/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "bFilter": false,
+                "paging": true,
+                "lengthChange": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });</script> }

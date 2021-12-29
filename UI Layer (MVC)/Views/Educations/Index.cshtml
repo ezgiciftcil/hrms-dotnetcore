@@ -1,8 +1,64 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Skills";
     Layout = "~/Views/Shared/JobSeekerLayout.cshtml";
 }
 
-<h1>Index</h1>
+<center>
+    <p><h1>My Skills</h1></p>
+</center>
+<div class="row mt-3">
+    <div class="col-md-10 offset-md-1">
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col px-4">
+                        <div>
 
+
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <table id="table_id" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Skill Name</th>
+                                                <th>Description</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            {
+                                            <tr>
+                                                <td>Skill Name</td>
+                                                <td>
+                                                    Skill Description
+                                                </td>
+                                                <td><a href="#" class="btn btn-info"> Edit </a></td>
+                                                <td><a href="#" class="btn btn-info"> Delete </a></td>
+                                            </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <a href="#" class="btn btn-info">
+                                                Add New Skill 
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

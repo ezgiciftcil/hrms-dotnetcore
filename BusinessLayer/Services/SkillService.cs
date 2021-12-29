@@ -13,21 +13,33 @@ namespace BusinessLayer.Services
         {
             _skillDal = skillDal;
         }
-        public Result AddSkill(Skill skill)
+        public Result AddSkill(int ResumeId,string SkillName)
         {
-            if (skill.SkillName == null)
+            if (SkillName == null)
             {
                 return new Result(false, "Skill can not be empty!");
             }
-            _skillDal.Add(skill);
+            var newSkill = new Skill
+            {
+                ResumeId = ResumeId,
+                SkillName = SkillName
+            };
+            _skillDal.Add(newSkill);
             return new Result(true, "Skill Added.");
         }
 
-        public Result DeleteSkill(Skill skill)
+        public Result DeleteSkill(int skillId)
         {
-            _skillDal.Delete(skill);
+            var deletedSkill = new Skill
+            {
+                SkillId = skillId,
+                
+        };
+            _skillDal.Delete(deletedSkill);
             return new Result(true, "Skill Deleted.");
         }
+
+        
 
         public DataResult<List<Skill>> GetAllSkills()
         {
@@ -39,9 +51,19 @@ namespace BusinessLayer.Services
             return new DataResult<Skill>(_skillDal.GetById(id), true);
         }
 
-        public Result UpdateSkill(Skill skill)
+        public DataResult<List<Skill>> GetUserAllSkills(int JobSeekerId)
         {
-            _skillDal.Update(skill);
+            return new DataResult<List<Skill>>(_skillDal.GetUserAllSkills(JobSeekerId), true);
+        }
+
+        public Result UpdateSkill(int SkillId,string SkillName)
+        {
+            var updatedSkill = new Skill
+            {
+                SkillId = SkillId,
+                SkillName = SkillName
+            };
+            _skillDal.Update(updatedSkill);
             return new Result(true, "Skill Updated.");
         }
     }

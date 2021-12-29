@@ -1,0 +1,22 @@
+﻿@model UI_Layer__MVC_.Models.Skill
+@{
+    ViewData["Title"] = "Add New Skill";
+    Layout = "~/Views/Shared/JobSeekerLayout.cshtml";
+}
+
+<form action="@Url.Action("AddNewSkill", "Skills")" method="post">
+    <div class="input-group mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input asp-for="SkillName" type="text" class="form-control" placeholder="Type Skill Name">
+            <input type="hidden" asp-for="ResumeId" value=@Model.ResumeId>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3">
+            <div class="col align-self-center">
+                <button type="submit" class="btn btn-info btn-block">Add New Skill</button>
+            </div>
+        </div>
+    </div>
+</form>

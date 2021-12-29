@@ -40,5 +40,10 @@ namespace BusinessLayer.Services
             _resumeDal.Update(resume);
             return new Result(true);
         }
+
+        public int GetJobSeekerResumeId(int JobSeekerId)
+        {
+            return _resumeDal.GetJobSeekerResumeId(JobSeekerId);
+        }
     }
 }

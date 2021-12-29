@@ -98,5 +98,20 @@ namespace DataAccessLayer.AdoRepositories
                 conn.Close();
             }
         }
+
+        public int GetJobSeekerResumeId(int JobSeekerId)
+        {
+            int ResumeId;
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                SqlCommand sqlCommand = new SqlCommand("GetJobSeekerResumeId", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@JobSeekerId", JobSeekerId);
+                conn.Open();
+                ResumeId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                conn.Close();
+                return ResumeId;
+            }
+        }
     }
 }
