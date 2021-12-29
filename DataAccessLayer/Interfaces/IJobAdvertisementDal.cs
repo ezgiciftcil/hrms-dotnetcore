@@ -7,5 +7,6 @@ namespace DataAccessLayer.Interfaces
     public interface IJobAdvertisementDal:IGenericDal<JobAdvertisement>
     {
         List<JobAdvertisementDTO> GetAllActiveJobAdvertisements();
+        JobAdvertisementDetailDTO GetJobAdvertisementDetailById(int JobAdvertisementId);
     }
 }

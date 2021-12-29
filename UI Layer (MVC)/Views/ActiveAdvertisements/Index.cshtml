@@ -18,7 +18,6 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
 <p class="text-center">
-    DataTable
     <div class="card-body">
         <table id="table_id" class="table table-bordered table-hover">
             <thead>
@@ -36,7 +35,7 @@
                     <td>
                         @element.JobTitle
                     </td>
-                    <td>@element.JobAdvertisementId</td>
+                    <td><a href="@Url.Action("JobAdDetail","ActiveAdvertisements",new { jobAdvId= element.JobAdvertisementId })" class="btn btn-info">Details</a></td>
                 </tr>
                 }
             </tbody>

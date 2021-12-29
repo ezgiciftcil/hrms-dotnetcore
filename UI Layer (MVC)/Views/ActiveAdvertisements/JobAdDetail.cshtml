@@ -1,0 +1,83 @@
+﻿@model UI_Layer__MVC_.Models.JobAdvertisementDetail
+@{
+    ViewData["Title"] = "Job Advertisement Details";
+    Layout = "~/Views/Shared/JobSeekerLayout.cshtml";
+}
+
+<center>
+    <p><h1>@Model.JobTitle</h1></p>
+    <p class="h6">Advertisement Publish Date : @Model.PublishDate </p>
+</center>
+
+@ViewBag.Id
+
+<div class="row mt-3">
+    <div class="col-md-10 offset-md-1">
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col px-4">
+                        <div>
+                            
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Company Name</label>
+                                            <label class="form-control select2" style="width: 100%;">
+                                                @Model.CompanyName
+                                            </label>
+                                        </div>
+
+                                        
+                                        <div class="form-group">
+                                            <label>Minimum Salary</label>
+                                            <label class="form-control select2" style="width: 100%;">
+                                                @Model.MinSalary
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label>City Name</label>
+                                            <label class="form-control select2" style="width: 100%;">
+                                                @Model.CityName
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Maximum Salary</label>
+                                            <label class="form-control select2" style="width: 100%;">
+                                                @Model.MaxSalary
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col text-center"><a href="#" class="btn btn-info">Apply</a></div>   
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-auto">
+                    </div>
+                    <div class="col px-4">
+                        <div>
+                            <h3>Job Description</h3>
+                            <p class="mb-0">@Model.JobDescription</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

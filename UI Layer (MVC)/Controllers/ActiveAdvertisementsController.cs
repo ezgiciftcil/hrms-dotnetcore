@@ -27,5 +27,24 @@ namespace UI_Layer__MVC_.Controllers
             }
             return View(adsToDisplay);
         }
+
+        public IActionResult JobAdDetail(int jobAdvId)
+        {
+            var jobAdvDetails = _jobAdvertisementService.GetJobAdvertisementDetailById(jobAdvId).Data;
+            var jobAdvModel = new JobAdvertisementDetail
+            {
+                CityName = jobAdvDetails.CityName,
+                CompanyName = jobAdvDetails.CompanyName,
+                CompanyWebsite=jobAdvDetails.CompanyWebsite,
+                JobDescription=jobAdvDetails.JobDescription,
+                JobTitle=jobAdvDetails.JobTitle,
+                MaxSalary=jobAdvDetails.MaxSalary,
+                PublishDate=jobAdvDetails.PublishDate,
+                MinSalary=jobAdvDetails.MinSalary
+            };
+
+            // ViewBag.Id = jobAdvId;
+            return View(jobAdvModel);
+        }
     }
 }

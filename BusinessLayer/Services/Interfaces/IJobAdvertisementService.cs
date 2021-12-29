@@ -13,5 +13,6 @@ namespace BusinessLayer.Services.Interfaces
         DataResult<List<JobAdvertisement>> GetAllJobAdvertisements();
         DataResult<JobAdvertisement> GetJobAdvertisementById(int id);
         DataResult<List<JobAdvertisementDTO>> GetAllActiveJobAdvertisements();
+        DataResult<JobAdvertisementDetailDTO> GetJobAdvertisementDetailById(int JobAdvertisementId);
     }
 }

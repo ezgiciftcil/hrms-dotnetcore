@@ -52,6 +52,11 @@ namespace BusinessLayer.Services
             return new DataResult<JobAdvertisement>(_jobAdvertisementDal.GetById(id), true, "Job Advertisement is listed.");
         }
 
+        public DataResult<JobAdvertisementDetailDTO> GetJobAdvertisementDetailById(int JobAdvertisementId)
+        {
+            return new DataResult<JobAdvertisementDetailDTO>(_jobAdvertisementDal.GetJobAdvertisementDetailById(JobAdvertisementId), true);
+        }
+
         public Result UpdateJobAdvertisement(JobAdvertisement jobAdvertisement)
         {
             _jobAdvertisementDal.Update(jobAdvertisement);

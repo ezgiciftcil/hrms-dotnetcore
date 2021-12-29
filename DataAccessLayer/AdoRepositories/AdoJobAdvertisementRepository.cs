@@ -150,5 +150,34 @@ namespace DataAccessLayer.AdoRepositories
                 conn.Close();
             }
         }
+
+        public JobAdvertisementDetailDTO GetJobAdvertisementDetailById(int JobAdvertisementId)
+        {
+            var jobAdvertisement = new JobAdvertisementDetailDTO();
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                var sqlCommand = new SqlCommand("GetActiveJobAdvertisementById", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@JobAdvertisementId", JobAdvertisementId);
+                conn.Open();
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        jobAdvertisement.CityName= reader["CityName"].ToString();
+                        jobAdvertisement.CompanyName= reader["CompanyName"].ToString();
+                        jobAdvertisement.CompanyWebsite= reader["CompanyWebsite"].ToString();
+                        jobAdvertisement.JobDescription = reader["JobDescription"].ToString();
+                        jobAdvertisement.JobTitle= reader["JobTitle"].ToString();
+                        jobAdvertisement.MaxSalary = Convert.ToInt32(reader["MaxSalary"]);
+                        jobAdvertisement.MinSalary = Convert.ToInt32(reader["MinSalary"]);
+                        jobAdvertisement.PublishDate = Convert.ToDateTime(reader["PublishDate"]);
+                    }
+                }
+
+                conn.Close();
+                return jobAdvertisement;
+            }
+        }
     }
 }
