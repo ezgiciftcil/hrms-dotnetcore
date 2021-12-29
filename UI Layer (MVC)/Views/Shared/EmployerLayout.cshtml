@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Fixed Sidebar</title>
+    <title>HRMSWeb</title>
 
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="~/css/OverlayScrollbars.min.css">
@@ -54,12 +54,6 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-bullhorn nav-icon"></i>
-                            <p>
-                                All Job Advertisements
-                            </p>
-                        </a>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-building nav-icon"></i>
@@ -70,13 +64,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="@Url.Action("Index","PostedAdvertisements")" class="nav-link">
                                         <i class="fas fa-list nav-icon"></i>
                                         <p>Posted Advertisements</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="@Url.Action("Index","PostAdvertisement")" class="nav-link">
                                         <i class="fas fa-plus nav-icon"></i>
                                         <p>Post New Advertisement</p>
                                     </a>
@@ -86,13 +80,13 @@
 
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("EmployerHome","Home")" class="nav-link">
                                 <i class="fas fa-home nav-icon"></i>
                                 <p>Home</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("Index","Logout")" class="nav-link">
                                 <i class="fas fa-sign-out-alt nav-icon"></i>
                                 <p>Log out</p>
                             </a>
