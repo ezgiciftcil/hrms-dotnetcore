@@ -14,5 +14,8 @@ namespace BusinessLayer.Services.Interfaces
         DataResult<JobAdvertisement> GetJobAdvertisementById(int id);
         DataResult<List<JobAdvertisementDTO>> GetAllActiveJobAdvertisements();
         DataResult<JobAdvertisementDetailDTO> GetJobAdvertisementDetailById(int JobAdvertisementId);
+        bool CheckIfUserAppliedJob(int JobAdvertisementId, int JobSeekerId);
+        Result ApplyJobAd(int JobAdvertisementId, int JobSeekerId);
+        DataResult<List<AppliedJobAdvertisementDTO>> GetAppliedJobAdvertisements(int JobSeekerId);
     }
 }

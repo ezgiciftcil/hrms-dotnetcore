@@ -12,5 +12,6 @@ namespace UI_Layer__MVC_.Models
         public int MaxSalary { get; set; }
         public int MinSalary { get; set; }
         public DateTime PublishDate { get; set; }
+        public int JobAdvertisementId { get; set; }
     }
 }

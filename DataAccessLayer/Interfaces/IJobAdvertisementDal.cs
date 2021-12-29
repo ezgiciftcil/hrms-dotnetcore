@@ -8,5 +8,8 @@ namespace DataAccessLayer.Interfaces
     {
         List<JobAdvertisementDTO> GetAllActiveJobAdvertisements();
         JobAdvertisementDetailDTO GetJobAdvertisementDetailById(int JobAdvertisementId);
+        int CheckIfUserAppliedJob(int JobAdvertisementId, int JobSeekerId);
+        void ApplyJobAd(int JobAdvertisementId, int JobSeekerId);
+        List<AppliedJobAdvertisementDTO> GetAppliedJobAdvertisements(int JobSeekerId);
     }
 }

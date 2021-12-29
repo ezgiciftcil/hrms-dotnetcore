@@ -179,5 +179,63 @@ namespace DataAccessLayer.AdoRepositories
                 return jobAdvertisement;
             }
         }
+
+        public int CheckIfUserAppliedJob(int JobAdvertisementId, int JobSeekerId)
+        {
+            int appliedNo;
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                SqlCommand sqlCommand = new SqlCommand("CheckIfUserAppliedJob", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@JobSeekerId", JobSeekerId);
+                sqlCommand.Parameters.AddWithValue("@JobAdvertisementId", JobAdvertisementId);
+                conn.Open();
+                appliedNo = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                conn.Close();
+                return appliedNo;
+            }
+        }
+        public void ApplyJobAd(int JobAdvertisementId, int JobSeekerId)
+        {
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                SqlCommand sqlCommand = new SqlCommand("ApplyJobAd", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@JobAdvertisementId", JobAdvertisementId);
+                sqlCommand.Parameters.AddWithValue("@JobSeekerId", JobSeekerId);
+                conn.Open();
+                sqlCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public List<AppliedJobAdvertisementDTO> GetAppliedJobAdvertisements(int JobSeekerId)
+        {
+            List<AppliedJobAdvertisementDTO> jobAdvertisements = new List<AppliedJobAdvertisementDTO>();
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                var sqlCommand = new SqlCommand("GetAppliedJobAdvertisements", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@JobSeekerId", JobSeekerId);
+                conn.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    var jobAdvertisement = new AppliedJobAdvertisementDTO
+                    {
+                        CompanyName = reader["CompanyName"].ToString(),
+                        ApplyDate=Convert.ToDateTime(reader["ApplyDate"]),
+                        JobTitle = reader["JobTitle"].ToString()
+                    };
+
+                    jobAdvertisements.Add(jobAdvertisement);
+                }
+
+                reader.Close();
+                conn.Close();
+            }
+
+            return jobAdvertisements;
+        }
     }
 }

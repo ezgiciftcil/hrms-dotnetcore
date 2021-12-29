@@ -62,5 +62,25 @@ namespace BusinessLayer.Services
             _jobAdvertisementDal.Update(jobAdvertisement);
             return new Result(true, "Advertisement is updated.");
         }
+
+        public bool CheckIfUserAppliedJob(int JobAdvertisementId, int JobSeekerId)
+        {
+            var check = _jobAdvertisementDal.CheckIfUserAppliedJob(JobAdvertisementId, JobSeekerId);
+            if (check == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        public Result ApplyJobAd(int JobAdvertisementId, int JobSeekerId)
+        {
+            _jobAdvertisementDal.ApplyJobAd(JobAdvertisementId, JobSeekerId);
+            return new Result(true, "Job Apply is Successfull!");
+        }
+
+        public DataResult<List<AppliedJobAdvertisementDTO>> GetAppliedJobAdvertisements(int JobSeekerId)
+        {
+            return new DataResult<List<AppliedJobAdvertisementDTO>>(_jobAdvertisementDal.GetAppliedJobAdvertisements(JobSeekerId), true);
+        }
     }
 }
