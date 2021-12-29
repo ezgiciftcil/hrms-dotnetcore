@@ -1,0 +1,26 @@
+﻿@model UI_Layer__MVC_.Models.Experience
+@{
+    ViewData["Title"] = "Edit Experience";
+    Layout = "~/Views/Shared/JobSeekerLayout.cshtml";
+}
+
+<form action="@Url.Action("EditExperience", "Experiences")" method="post">
+    <div class="input-group mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input asp-for="CompanyName" type="text" class="form-control" placeholder="Company">
+            <input asp-for="JobTitle" type="text" class="form-control" placeholder="Job Title">
+            <input asp-for="JobDescription" type="text" class="form-control" placeholder="JobDescription">
+            <input asp-for="StartDate" type="date" class="form-control" placeholder="Start Date">
+            <input asp-for="EndDate" type="date" class="form-control" placeholder="End Date">
+            <input type="hidden" asp-for="ExperienceId" value=@Model.ExperienceId>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3">
+            <div class="col align-self-center">
+                <button type="submit" class="btn btn-info btn-block">Edit Experience</button>
+            </div>
+        </div>
+    </div>
+</form>
