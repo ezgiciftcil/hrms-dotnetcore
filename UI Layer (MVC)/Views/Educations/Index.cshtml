@@ -1,11 +1,23 @@
-﻿
+﻿@model List<Education>
 @{
-    ViewData["Title"] = "My Skills";
+    ViewData["Title"] = "My Educations";
     Layout = "~/Views/Shared/JobSeekerLayout.cshtml";
 }
 
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/css/all.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/css/adminlte.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <center>
-    <p><h1>My Skills</h1></p>
+    <p><h1>My Educations</h1></p>
 </center>
 <div class="row mt-3">
     <div class="col-md-10 offset-md-1">
@@ -18,47 +30,89 @@
 
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="col-sm">
+                                        <table id="table_id" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>University</th>
+                                                    <th>Department</th>
+                                                    <th>GPA</th>
+                                                    <th>Start</th>
+                                                    <th>End</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                <tr>
+                                                    <td>@item.UniversityName</td>
+                                                    <td>@item.DepartmentName</td>
+                                                    <td>@item.GPA</td>
+                                                    <td>@item.StartDate.Date</td>
+                                                    <td>@item.FinishDate.Date</td>
+                                                    <td>
+                                                        <center>
+                                                            <a href="@Url.Action("EditEducation","Educations",new { educationId = item.EducationId })" class="btn btn-info"> Edit </a>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <a href="@Url.Action("DeleteEducation","Educations",new { educationId = item.EducationId })" class="btn btn-danger"> Delete </a>
+                                                        </center>
+                                                    </td>
 
-                                    <table id="table_id" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Skill Name</th>
-                                                <th>Description</th>
-                                                <th>Edit</th>
-                                                <th>Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                            {
-                                            <tr>
-                                                <td>Skill Name</td>
-                                                <td>
-                                                    Skill Description
-                                                </td>
-                                                <td><a href="#" class="btn btn-info"> Edit </a></td>
-                                                <td><a href="#" class="btn btn-info"> Delete </a></td>
-                                            </tr>
-                                            }
-                                        </tbody>
+                                                </tr>
+                                               }
+                                            </tbody>
 
-                                    </table>
+                                        </table>
 
-                                </div>
-
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <a href="#" class="btn btn-info">
-                                                Add New Skill 
-                                            </a>
-                                        </div>
                                     </div>
+
+
                                 </div>
+                            </div>
                         </div>
                     </div>
-                  
+
+                </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <a href="@Url.Action("AddNewEducation","Educations")" class="btn btn-info">
+                            Add New Education
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts
+    {
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="~/js/adminlte.min.js"></script>
+    <script src="~/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "bFilter": false,
+                "paging": true,
+                "lengthChange": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });</script> }

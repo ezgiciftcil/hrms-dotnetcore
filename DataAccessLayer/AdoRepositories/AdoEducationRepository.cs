@@ -101,6 +101,39 @@ namespace DataAccessLayer.AdoRepositories
             }
         }
 
+        public List<Education> GetUserAllEducations(int resumeId)
+        {
+            List<Education> educations = new List<Education>();
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                var sqlCommand = new SqlCommand("GetUserAllEducations", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@ResumeId", resumeId);
+                conn.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    var education = new Education
+                    {
+                        ResumeId = Convert.ToInt32(reader["ResumeId"]),
+                        DepartmentName = reader["DepartmentName"].ToString(),
+                        EducationId = Convert.ToInt32(reader["EducationId"]),
+                        UniversityName = reader["UniversityName"].ToString(),
+                        GPA = Convert.ToDouble(reader["GPA"]),
+                        StartDate = Convert.ToDateTime(reader["StartDate"]),
+                        FinishDate = Convert.ToDateTime(reader["FinishDate"]),
+                    };
+
+                    educations.Add(education);
+                }
+
+                reader.Close();
+                conn.Close();
+            }
+
+            return educations;
+        }
+
         public void Update(Education t)
         {
             using (var conn = new SqlConnection(MSSQLConnectionString.connString))

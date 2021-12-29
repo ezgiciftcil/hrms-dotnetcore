@@ -102,6 +102,38 @@ namespace DataAccessLayer.AdoRepositories
             }
         }
 
+        public List<Experience> GetUserAllExperiences(int resumeId)
+        {
+            List<Experience> experiences = new List<Experience>();
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                var sqlCommand = new SqlCommand("GetUserAllExperiences", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@ResumeId", resumeId);
+                conn.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    var experience = new Experience
+                    {
+                        ResumeId = Convert.ToInt32(reader["ResumeId"]),
+                        CompanyName = reader["CompanyName"].ToString(),
+                        ExperienceId = Convert.ToInt32(reader["ExperienceId"]),
+                        JobDescription = reader["JobDescription"].ToString(),
+                        JobTitle = reader["JobTitle"].ToString(),
+                        StartDate = Convert.ToDateTime(reader["StartDate"]),
+                        EndDate = Convert.ToDateTime(reader["EndDate"]),
+                    };
+
+                    experiences.Add(experience);
+                }
+
+                reader.Close();
+                conn.Close();
+            }
+            return experiences;
+        }
+
         public void Update(Experience t)
         {
             using (var conn = new SqlConnection(MSSQLConnectionString.connString))

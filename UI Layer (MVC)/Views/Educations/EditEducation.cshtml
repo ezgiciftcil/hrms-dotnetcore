@@ -1,0 +1,26 @@
+﻿@model UI_Layer__MVC_.Models.Education
+@{
+    ViewData["Title"] = "Edit Education";
+    Layout = "~/Views/Shared/JobSeekerLayout.cshtml";
+}
+
+<form action="@Url.Action("EditEducation", "Educations")" method="post">
+    <div class="input-group mb-3">
+        <div class="col-md-6 offset-md-3">
+            <input asp-for="UniversityName" type="text" class="form-control" placeholder="University Name">
+            <input asp-for="DepartmentName" type="text" class="form-control" placeholder="Department Name">
+            <input asp-for="GPA" type="number" step="0.01" class="form-control" placeholder="GPA">
+            <input asp-for="StartDate" type="date" class="form-control" placeholder="Start Date">
+            <input asp-for="FinishDate" type="date" class="form-control" placeholder="Finish Date">
+            <input type="hidden" asp-for="EducationId" value=@Model.EducationId>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3">
+            <div class="col align-self-center">
+                <button type="submit" class="btn btn-info btn-block">Edit Education</button>
+            </div>
+        </div>
+    </div>
+</form>

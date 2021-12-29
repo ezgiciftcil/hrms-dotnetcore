@@ -2,6 +2,7 @@
 using BusinessLayer.Utilities.Results;
 using DataAccessLayer.Interfaces;
 using EntityLayer;
+using EntityLayer.DTO_s;
 using System.Collections.Generic;
 
 namespace BusinessLayer.Services
@@ -14,19 +15,32 @@ namespace BusinessLayer.Services
             _experienceDal = experienceDal;
         }
 
-        public Result AddExperience(Experience experience)
+        public Result AddExperience(ExperienceDTO experience)
         {
             if(experience.CompanyName==null || experience.JobDescription==null || experience.JobTitle==null)
             {
                 return new Result(false, "Old Job Experience Details can not be Empty!");
             }
-            _experienceDal.Add(experience);
+            var newExperience = new Experience
+            {
+                ResumeId = experience.ResumeId,
+                CompanyName = experience.CompanyName,
+                JobDescription = experience.JobDescription,
+                JobTitle = experience.JobTitle,
+                StartDate = experience.StartDate,
+                EndDate = experience.EndDate
+            };
+            _experienceDal.Add(newExperience);
             return new Result(true, "Experience Added");
         }
 
-        public Result DeleteExperience(Experience experience)
+        public Result DeleteExperience(int experienceId)
         {
-            _experienceDal.Delete(experience);
+            var deletedExperience = new Experience
+            {
+                ExperienceId = experienceId
+            };
+            _experienceDal.Delete(deletedExperience);
             return new Result(true, "Experience Deleted.");
         }
 
@@ -40,9 +54,23 @@ namespace BusinessLayer.Services
             return new DataResult<Experience>(_experienceDal.GetById(id), true);
         }
 
-        public Result UpdateExperience(Experience experience)
+        public DataResult<List<Experience>> GetUserAllExperiences(int resumeId)
         {
-            _experienceDal.Update(experience);
+            return new DataResult<List<Experience>>(_experienceDal.GetUserAllExperiences(resumeId), true);
+        }
+
+        public Result UpdateExperience(ExperienceDTO experience)
+        {
+            var updatedExperience = new Experience
+            {
+                ExperienceId = experience.ExperienceId,
+                CompanyName = experience.CompanyName,
+                JobDescription = experience.JobDescription,
+                JobTitle = experience.JobTitle,
+                StartDate = experience.StartDate,
+                EndDate = experience.EndDate
+            };
+            _experienceDal.Update(updatedExperience);
             return new Result(true, "Experience Updated.");
         }
     }
