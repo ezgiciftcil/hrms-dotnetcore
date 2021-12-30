@@ -15,7 +15,7 @@ namespace BusinessLayer.Services
         {
             _jobAdvertisementDal = jobAdvertisementDal;
         }
-        public Result AddJobAdvertisement(JobAdvertisement jobAdvertisement)
+        public Result AddJobAdvertisement(EmployerJobAdvertisementDTO jobAdvertisement)
         {
             if(jobAdvertisement.JobDescription==null || jobAdvertisement.JobTitle == null)
             {
@@ -25,9 +25,18 @@ namespace BusinessLayer.Services
             {
                 return new Result(false, "Maximum Salary can not be less than Minimum Salary!");
             }
-            jobAdvertisement.PublishDate = DateTime.Now;
-            jobAdvertisement.IsActive = true;
-            _jobAdvertisementDal.Add(jobAdvertisement);
+            var newJobAdvertisement = new JobAdvertisement
+            {
+                PublishDate = DateTime.Now,
+                IsActive = true,
+                CityId = jobAdvertisement.CityId,
+                EmployerId = jobAdvertisement.EmployerId,
+                JobDescription = jobAdvertisement.JobDescription,
+                JobTitle = jobAdvertisement.JobTitle,
+                MaxSalary = jobAdvertisement.MaxSalary,
+                MinSalary = jobAdvertisement.MinSalary
+            };
+            _jobAdvertisementDal.Add(newJobAdvertisement);
             return new Result(true, "Job Advertisement Added.");
         }
 
@@ -57,9 +66,19 @@ namespace BusinessLayer.Services
             return new DataResult<JobAdvertisementDetailDTO>(_jobAdvertisementDal.GetJobAdvertisementDetailById(JobAdvertisementId), true);
         }
 
-        public Result UpdateJobAdvertisement(JobAdvertisement jobAdvertisement)
+        public Result UpdateJobAdvertisement(EmployerJobAdvertisementDTO jobAdvertisement)
         {
-            _jobAdvertisementDal.Update(jobAdvertisement);
+            var updatedJobAdvertisement = new JobAdvertisement
+            {
+                CityId = jobAdvertisement.CityId,
+                JobAdvertisementId = jobAdvertisement.JobAdvertisementId,
+                IsActive = true,
+                JobDescription = jobAdvertisement.JobDescription,
+                JobTitle = jobAdvertisement.JobTitle,
+                MaxSalary = jobAdvertisement.MaxSalary,
+                MinSalary = jobAdvertisement.MinSalary
+            };
+            _jobAdvertisementDal.Update(updatedJobAdvertisement);
             return new Result(true, "Advertisement is updated.");
         }
 
@@ -81,6 +100,23 @@ namespace BusinessLayer.Services
         public DataResult<List<AppliedJobAdvertisementDTO>> GetAppliedJobAdvertisements(int JobSeekerId)
         {
             return new DataResult<List<AppliedJobAdvertisementDTO>>(_jobAdvertisementDal.GetAppliedJobAdvertisements(JobSeekerId), true);
+        }
+
+        public Result DeactiveJobAdvertisement(int JobAdvertisementId)
+        {
+            _jobAdvertisementDal.DeactiveJobAdvertisement(JobAdvertisementId);
+            return new Result(true, "Deactivated");
+        }
+
+        public Result ActivateJobAdvertisement(int JobAdvertisementId)
+        {
+            _jobAdvertisementDal.ActivateJobAdvertisement(JobAdvertisementId);
+            return new Result(true, "Activated");
+        }
+
+        public DataResult<List<EmployerJobAdvertisementDTO>> GetEmployerAllJobAdvertisements(int EmployerId)
+        {
+            return new DataResult<List<EmployerJobAdvertisementDTO>>(_jobAdvertisementDal.GetEmployerAllJobAdvertisements(EmployerId), true);
         }
     }
 }

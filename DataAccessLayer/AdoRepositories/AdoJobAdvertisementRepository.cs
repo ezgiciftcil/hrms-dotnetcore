@@ -139,6 +139,7 @@ namespace DataAccessLayer.AdoRepositories
             {
                 SqlCommand sqlCommand = new SqlCommand("UpdateJobAdvertisement", conn);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@CityId", t.CityId);
                 sqlCommand.Parameters.AddWithValue("@IsActive", t.IsActive);
                 sqlCommand.Parameters.AddWithValue("@JobAdvertisementId", t.JobAdvertisementId);
                 sqlCommand.Parameters.AddWithValue("@JobDescription", t.JobDescription);
@@ -226,6 +227,66 @@ namespace DataAccessLayer.AdoRepositories
                         CompanyName = reader["CompanyName"].ToString(),
                         ApplyDate=Convert.ToDateTime(reader["ApplyDate"]),
                         JobTitle = reader["JobTitle"].ToString()
+                    };
+
+                    jobAdvertisements.Add(jobAdvertisement);
+                }
+
+                reader.Close();
+                conn.Close();
+            }
+
+            return jobAdvertisements;
+        }
+
+        public void DeactiveJobAdvertisement(int JobAdvertisementId)
+        {
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                SqlCommand sqlCommand = new SqlCommand("DeactiveJobAdvertisement", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@JobAdvertisementId", JobAdvertisementId);
+                conn.Open();
+                sqlCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+        public void ActivateJobAdvertisement(int JobAdvertisementId)
+        {
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                SqlCommand sqlCommand = new SqlCommand("ActivateJobAdvertisement", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@JobAdvertisementId", JobAdvertisementId);
+                conn.Open();
+                sqlCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+        public List<EmployerJobAdvertisementDTO> GetEmployerAllJobAdvertisements(int EmployerId)
+        {
+            List<EmployerJobAdvertisementDTO> jobAdvertisements = new List<EmployerJobAdvertisementDTO>();
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                var sqlCommand = new SqlCommand("GetEmployerAllJobAdvertisements", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@EmployerId", EmployerId);
+                conn.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    var jobAdvertisement = new EmployerJobAdvertisementDTO
+                    {
+                        CityId= Convert.ToInt32(reader["CityId"]),
+                        JobAdvertisementId = Convert.ToInt32(reader["JobAdvertisementId"]),
+                        JobTitle = reader["JobTitle"].ToString(),
+                        CityName= reader["CityName"].ToString(),
+                        EmployerId= Convert.ToInt32(reader["EmployerId"]),
+                        IsActive=Convert.ToBoolean(reader["IsActive"]),
+                        JobDescription= reader["JobDescription"].ToString(),
+                        MaxSalary = Convert.ToInt32(reader["MaxSalary"]),
+                        MinSalary = Convert.ToInt32(reader["MinSalary"]),
+                        PublishDate= Convert.ToDateTime(reader["PublishDate"])
                     };
 
                     jobAdvertisements.Add(jobAdvertisement);
