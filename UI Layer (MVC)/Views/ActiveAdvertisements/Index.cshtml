@@ -24,7 +24,7 @@
                 <tr>
                     <th>Company Name</th>
                     <th>Job Title</th>
-                    <th>Job Details</th>
+                    <th><center><i class="fas fa-search nav-icon"></i></center></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +35,9 @@
                     <td>
                         @element.JobTitle
                     </td>
-                    <td><a href="@Url.Action("JobAdDetail","ActiveAdvertisements",new { jobAdvId= element.JobAdvertisementId })" class="btn btn-info">Details</a></td>
+                    <td><center>
+    <a href="@Url.Action("JobAdDetail","ActiveAdvertisements",new { jobAdvId= element.JobAdvertisementId })" class="btn btn-info">Details</a> </center>
+</td>
                 </tr>
                 }
             </tbody>
