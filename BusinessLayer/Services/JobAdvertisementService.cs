@@ -118,5 +118,10 @@ namespace BusinessLayer.Services
         {
             return new DataResult<List<EmployerJobAdvertisementDTO>>(_jobAdvertisementDal.GetEmployerAllJobAdvertisements(EmployerId), true);
         }
+
+        public DataResult<List<CandidateDTO>> GetAllUsersAppliedJob(int JobAdvertisementId)
+        {
+            return new DataResult<List<CandidateDTO>>(_jobAdvertisementDal.GetAllUsersAppliedJob(JobAdvertisementId), true);
+        }
     }
 }

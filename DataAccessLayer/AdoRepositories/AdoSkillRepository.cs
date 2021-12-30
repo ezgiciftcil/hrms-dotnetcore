@@ -91,14 +91,14 @@ namespace DataAccessLayer.AdoRepositories
             }
         }
 
-        public List<Skill> GetUserAllSkills(int JobSeekerId)
+        public List<Skill> GetUserAllSkills(int resumeId)
         {
             List<Skill> skills = new List<Skill>();
             using (var conn = new SqlConnection(MSSQLConnectionString.connString))
             {
                 var sqlCommand = new SqlCommand("GetUserAllSkills", conn);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@JobSeekerId", JobSeekerId);
+                sqlCommand.Parameters.AddWithValue("@ResumeId", resumeId);
                 conn.Open();
                 SqlDataReader reader = sqlCommand.ExecuteReader();
                 while (reader.Read())

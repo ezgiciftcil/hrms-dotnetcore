@@ -19,7 +19,8 @@ namespace UI_Layer__MVC_.Controllers
         public IActionResult Index()
         {
             var userId = Convert.ToInt32(HttpContext.Session.GetInt32(SessionInfo.SessionUserId));
-            var allSkills = _skillService.GetUserAllSkills(userId).Data;
+            var resumeId = _resumeService.GetJobSeekerResumeId(userId);
+            var allSkills = _skillService.GetUserAllSkills(resumeId).Data;
             var skillList = new List<Skill>();
             foreach (var skill in allSkills)
             {

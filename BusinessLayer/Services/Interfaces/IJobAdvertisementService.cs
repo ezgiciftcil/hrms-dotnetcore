@@ -20,5 +20,6 @@ namespace BusinessLayer.Services.Interfaces
         Result DeactiveJobAdvertisement(int JobAdvertisementId);
         Result ActivateJobAdvertisement(int JobAdvertisementId);
         DataResult<List<EmployerJobAdvertisementDTO>> GetEmployerAllJobAdvertisements(int EmployerId);
+        DataResult<List<CandidateDTO>> GetAllUsersAppliedJob(int JobAdvertisementId);
     }
 }

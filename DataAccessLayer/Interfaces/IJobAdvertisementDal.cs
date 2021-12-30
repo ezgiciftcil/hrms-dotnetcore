@@ -14,5 +14,6 @@ namespace DataAccessLayer.Interfaces
         void DeactiveJobAdvertisement(int JobAdvertisementId);
         void ActivateJobAdvertisement(int JobAdvertisementId);
         List<EmployerJobAdvertisementDTO> GetEmployerAllJobAdvertisements(int EmployerId);
+        List<CandidateDTO> GetAllUsersAppliedJob(int JobAdvertisementId);
     }
 }

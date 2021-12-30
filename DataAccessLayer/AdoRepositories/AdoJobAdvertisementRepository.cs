@@ -298,5 +298,38 @@ namespace DataAccessLayer.AdoRepositories
 
             return jobAdvertisements;
         }
+
+        public List<CandidateDTO> GetAllUsersAppliedJob(int JobAdvertisementId)
+        {
+            List<CandidateDTO> jobAdvertisements = new List<CandidateDTO>();
+            using (var conn = new SqlConnection(MSSQLConnectionString.connString))
+            {
+                var sqlCommand = new SqlCommand("GetAllUsersAppliedJob", conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@JobAdvertisementId", JobAdvertisementId);
+                conn.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    var jobAdvertisement = new CandidateDTO
+                    {
+                        JobSeekerId = Convert.ToInt32(reader["JobSeekerId"]),
+                        JobAdvertisementId = Convert.ToInt32(reader["JobAdvertisementId"]),
+                        Email = reader["Email"].ToString(),
+                        FirstName = reader["FirstName"].ToString(),
+                        LastName = reader["LastName"].ToString(),
+                        PhoneNumber = reader["PhoneNumber"].ToString(),
+                        ResumeId = Convert.ToInt32(reader["ResumeId"])
+                    };
+
+                    jobAdvertisements.Add(jobAdvertisement);
+                }
+
+                reader.Close();
+                conn.Close();
+            }
+
+            return jobAdvertisements;
+        }
     }
 }

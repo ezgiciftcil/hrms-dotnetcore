@@ -11,6 +11,6 @@ namespace BusinessLayer.Services.Interfaces
         Result DeleteSkill(int skillId);
         DataResult<List<Skill>> GetAllSkills();
         DataResult<Skill> GetSkillById(int id);
-        DataResult<List<Skill>> GetUserAllSkills(int JobSeekerId);
+        DataResult<List<Skill>> GetUserAllSkills(int resumeId);
     }
 }

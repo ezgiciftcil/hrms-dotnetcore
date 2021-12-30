@@ -51,9 +51,9 @@ namespace BusinessLayer.Services
             return new DataResult<Skill>(_skillDal.GetById(id), true);
         }
 
-        public DataResult<List<Skill>> GetUserAllSkills(int JobSeekerId)
+        public DataResult<List<Skill>> GetUserAllSkills(int resumeId)
         {
-            return new DataResult<List<Skill>>(_skillDal.GetUserAllSkills(JobSeekerId), true);
+            return new DataResult<List<Skill>>(_skillDal.GetUserAllSkills(resumeId), true);
         }
 
         public Result UpdateSkill(int SkillId,string SkillName)
