@@ -37,9 +37,9 @@
                                                 <tr>
                                                     <th>Job Title</th>
                                                     <th>Publish Date</th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th><center> <i class="fas fa-edit nav-icon"></i></center></th>
+                                                    <th><center> <i class="fas fa-users nav-icon"></i></center></th>
+                                                    <th><center> <i class="fas fa-times nav-icon"></i></center></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -56,7 +56,7 @@
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <a href="#" class="btn btn-info"> Candidates </a>
+                                                            <a href="@Url.Action("Index","Candidates",new { JobAdvertisementId = ad.JobAdvertisementId})" class="btn btn-info"> Candidates </a>
                                                         </center>
                                                     </td>
                                                     <td>

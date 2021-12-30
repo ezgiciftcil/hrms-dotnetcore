@@ -1,8 +1,8 @@
-﻿@model List<EmployerJobAdvertisement>
-@{
-    ViewData["Title"] = "Closed Job Advertisements";
+﻿@{
+    ViewData["Title"] = "Candidates";
     Layout = "~/Views/Shared/EmployerLayout.cshtml";
 }
+
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -16,7 +16,7 @@
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <center>
-    <p><h1>My Closed Job Advertisements</h1></p>
+    <p><h1>Candidates</h1></p>
 </center>
 <div class="row mt-3">
     <div class="col-md-10 offset-md-1">
@@ -33,27 +33,39 @@
                                         <table id="table_id" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Job Title</th>
-                                                    <th>Publish Date</th>
-                                                    <th><center> <i class="fas fa-bullhorn nav-icon"></i></center></th>
+                                                    <th>Name</th>
+                                                    <th>Surname</th>
+                                                    <th>Contact</th>
+                                                    <th><center> <i class="far fa-file nav-icon"></i></center></th>
+                                                    <th> <center><i class="fas fa-graduation-cap nav-icon"></i></center></th>
+                                                    <th><center><i class="fas fa-tools nav-icon"></i></center></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var ad in Model)
-                                                {
+                                                @*@foreach (var ad in Model)*@
+                                                <tr>
+                                                    <td>İsim</td>
+                                                    <td>Soyisim</td>
+                                                    <td>Telefon</td>
+                                                    <td>
+                                                        <center>
+                                                            <a href="#" class="btn btn-success"> Experiences</a>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <a href="#" class="btn btn-info"> Education</a>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <a href="#" class="btn btn-primary"> Skills </a>
+                                                        </center>
+                                                    </td>
 
-                                                    <tr>
-                                                        <td>@ad.JobTitle</td>
-                                                        <td>@ad.PublishDate</td>
-                                                        <td>
-                                                            <center>
-                                                                <a href="@Url.Action("OpenAd","PostedAdvertisements",new { JobAdvertisementId =ad.JobAdvertisementId })" class="btn btn-success"> Open Advertisement Again </a>
-                                                            </center>
-                                                        </td>
+                                                </tr>
 
-                                                    </tr>
-
-                                                }
+                                                @*}*@
                                             </tbody>
 
                                         </table>
@@ -64,13 +76,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <a href="@Url.Action("Index","PostedAdvertisements")" class="btn btn-info">
-                            My Open Job Advertisements
-                        </a>
                     </div>
                 </div>
             </div>
@@ -103,4 +108,3 @@
                 "responsive": true,
             });
         });</script> }
-
