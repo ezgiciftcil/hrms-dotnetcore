@@ -1,10 +1,9 @@
 ﻿using BusinessLayer.Services.Interfaces;
+using EntityLayer.DTO_s;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UI_Layer__MVC_.Models;
 
 namespace UI_Layer__MVC_.Controllers
@@ -12,9 +11,11 @@ namespace UI_Layer__MVC_.Controllers
     public class PostedAdvertisements : Controller
     {
         private readonly IJobAdvertisementService _jobAdvertisementService;
-        public PostedAdvertisements(IJobAdvertisementService jobAdvertisementService)
+        private readonly ICityService _cityService;
+        public PostedAdvertisements(IJobAdvertisementService jobAdvertisementService, ICityService cityService)
         {
             _jobAdvertisementService = jobAdvertisementService;
+            _cityService = cityService;
         }
         public IActionResult Index()
         {
@@ -83,6 +84,34 @@ namespace UI_Layer__MVC_.Controllers
                 return RedirectToAction("GetDeactiveAds", "PostedAdvertisements");
             }
             return RedirectToAction("GetDeactiveAds", "PostedAdvertisements");
+        }
+
+        public IActionResult UpdateAdvertisement(int JobAdvertisementId)
+        {
+            var citySelectList = new CitySelectList(_cityService);
+            var cities = citySelectList.GetCities();
+            ViewBag.cities = cities;
+            ViewBag.jobAdvertisementId = JobAdvertisementId;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAdvertisement(EmployerJobAdvertisement jobAdvertisement)
+        {
+            var updatedAdvertisement = new EmployerJobAdvertisementDTO
+            {
+                CityId = jobAdvertisement.CityId,
+                JobAdvertisementId = jobAdvertisement.JobAdvertisementId,
+                JobDescription = jobAdvertisement.JobDescription,
+                JobTitle = jobAdvertisement.JobTitle,
+                MaxSalary = jobAdvertisement.MaxSalary,
+                MinSalary = jobAdvertisement.MinSalary
+            };
+            if (_jobAdvertisementService.UpdateJobAdvertisement(updatedAdvertisement).Success)
+            {
+                return RedirectToAction("Index", "PostedAdvertisements");
+            }
+            return RedirectToAction("UpdateAdvertisement", "PostedAdvertisements",new { JobAdvertisementId  = jobAdvertisement.JobAdvertisementId});
         }
     }
 }

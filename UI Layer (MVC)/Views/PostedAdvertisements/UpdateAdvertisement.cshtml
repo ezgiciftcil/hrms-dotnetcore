@@ -1,0 +1,35 @@
+﻿@model EmployerJobAdvertisement
+@{
+    ViewData["Title"] = "Edit Job Advertisement";
+    Layout = "~/Views/Shared/EmployerLayout.cshtml";
+}
+
+
+<form action="@Url.Action("UpdateAdvertisement","PostedAdvertisements")" method="post">
+    <div class="input-group mb-3">
+        <div class="col-md-6 offset-md-3">
+            <label>Job Title</label>
+            <input asp-for="JobTitle" type="text" class="form-control" placeholder="Job Title">
+            <label>Job Description</label>
+            <input asp-for="JobDescription" type="text" class="form-control" placeholder="Job Description">
+            <label>Minimum Salary</label>
+            <input asp-for="MinSalary" type="number" class="form-control" placeholder="Min Salary">
+            <label>Maximum Salary</label>
+            <input asp-for="MaxSalary" type="number" class="form-control" placeholder="Max Salary">
+            <label>City</label>
+            <select asp-items="@ViewBag.cities" asp-for="CityId" style="width: 100%" class="form-control select2-">
+                <option disabled selected hidden>Select City</option>
+            </select>
+            <input type="hidden" asp-for="JobAdvertisementId" value="@ViewBag.jobAdvertisementId">
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3">
+            <div class="col align-self-center">
+                <button type="submit" class="btn btn-info btn-block">Edit Job Advertisement</button>
+            </div>
+        </div>
+    </div>
+</form>
+
