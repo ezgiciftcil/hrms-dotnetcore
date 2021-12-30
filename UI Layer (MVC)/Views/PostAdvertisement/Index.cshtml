@@ -1,20 +1,25 @@
-﻿
+﻿@model EmployerJobAdvertisement
 @{
     ViewData["Title"] = "Post New Advertisement";
     Layout = "~/Views/Shared/EmployerLayout.cshtml";
 }
 
-<form action="#" method="post">
+<form action="@Url.Action("Index","PostAdvertisement")" method="post">
     <div class="input-group mb-3">
         <div class="col-md-6 offset-md-3">
-            <input @*asp-for="UniversityName"*@ type="text" class="form-control" placeholder="Job Title">
-            <input @*asp-for="DepartmentName"*@ type="text" class="form-control" placeholder="Job Description">
-            <input @*asp-for="GPA"*@ type="number" class="form-control" placeholder="Min Salary">
-            <input @*asp-for="StartDate"*@ type="number" class="form-control" placeholder="Max Salary">
-            <select class="form-control select2-">
-                <option>City Name Drop edip Id çekmem lazım </option>
+            <label>Job Title</label>
+            <input asp-for="JobTitle" type="text" class="form-control" placeholder="Job Title">
+            <label>Job Description</label>
+            <input asp-for="JobDescription" type="text" class="form-control" placeholder="Job Description">
+            <label>Minimum Salary</label>
+            <input asp-for="MinSalary" type="number" class="form-control" placeholder="Min Salary">
+            <label>Maximum Salary</label>
+            <input asp-for="MaxSalary" type="number" class="form-control" placeholder="Max Salary">
+            <label>City</label>
+            <select asp-items="@ViewBag.cities" asp-for="CityId" style="width: 100%" class="form-control select2-">
+                <option disabled selected hidden>Select City</option>
             </select>
-            @*<input type="hidden" asp-for="ResumeId" value=@Model.ResumeId>*@
+            <input type="hidden" asp-for="EmployerId" value="@ViewBag.employerId">
         </div>
     </div>
     <div class="row">
